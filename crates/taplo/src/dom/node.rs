@@ -249,13 +249,6 @@ impl Node {
 
         match self {
             Node::Table(v) => {
-                let entries = v.entries().read();
-
-                for (k, entry) in entries.iter() {
-                    ranges.extend(k.text_ranges());
-                    ranges.extend(entry.text_ranges());
-                }
-
                 if let Some(mut r) = v.syntax().map(|s| s.text_range()) {
                     for range in &ranges {
                         r = r.cover(*range);
